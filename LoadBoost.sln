@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBoost.Core", "LoadBoost.Core\LoadBoost.Core.csproj", "{FAE1A99A-B547-4B67-BAB2-3944D2486F76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBoost", "LoadBoost\LoadBoost.csproj", "{64FD28D2-D448-42F9-9D19-40F10F1C349F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBoost.Tests", "LoadBoost.Tests\LoadBoost.Tests.csproj", "{96BEBF81-4C48-4F4B-A312-76071F8AA53B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAE1A99A-B547-4B67-BAB2-3944D2486F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE1A99A-B547-4B67-BAB2-3944D2486F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE1A99A-B547-4B67-BAB2-3944D2486F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE1A99A-B547-4B67-BAB2-3944D2486F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FD28D2-D448-42F9-9D19-40F10F1C349F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FD28D2-D448-42F9-9D19-40F10F1C349F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FD28D2-D448-42F9-9D19-40F10F1C349F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FD28D2-D448-42F9-9D19-40F10F1C349F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96BEBF81-4C48-4F4B-A312-76071F8AA53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96BEBF81-4C48-4F4B-A312-76071F8AA53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96BEBF81-4C48-4F4B-A312-76071F8AA53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96BEBF81-4C48-4F4B-A312-76071F8AA53B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

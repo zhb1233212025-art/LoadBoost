@@ -1,0 +1,9 @@
+LOADBOOST_SETTINGS
+{
+    enablePrewarm = false
+    prewarmThreads = 2
+    reportEnabled = true
+    verboseLog = false
+    perfKey = F9
+    enableDiskScan = false
+}
