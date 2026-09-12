@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net481</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>EngineLifecycle</AssemblyName>
+    <RootNamespace>EngineLifecycle</RootNamespace>
+    <Version>1.0.0</Version>
+    <KspManaged>E:\ksp\Kerbal Space Program\KSP_x64_Data\Managed</KspManaged>
+    <RefsDir>$(MSBuildProjectDirectory)\..\refs</RefsDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(KspManaged)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(KspManaged)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(RefsDir)\harmony\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Kerbalism">
+      <HintPath>$(RefsDir)\kerbalism\Kerbalism.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="KerbalismEngineFailures">
+      <HintPath>$(RefsDir)\kef\KerbalismEngineFailures.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="ScrapYard">
+      <HintPath>$(RefsDir)\scrapyard\ScrapYard.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
