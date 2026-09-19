@@ -12,6 +12,7 @@ namespace LoadBoost
         public bool VerboseLog = false;
         public bool EnableDiskScan = true;
         public string PerfKey = "F9";
+        public bool WelcomeShown = false;
 
         internal static Settings Current { get; private set; }
         internal static void SetCurrent(Settings s) { Current = s; }
@@ -35,12 +36,35 @@ namespace LoadBoost
                 if (node.TryGetValue("prewarmThreads", ref i)) s.PrewarmThreads = i;
                 string sv = null;
                 if (node.TryGetValue("perfKey", ref sv) && !string.IsNullOrEmpty(sv)) s.PerfKey = sv;
+                if (node.TryGetValue("welcomeShown", ref b)) s.WelcomeShown = b;
             }
             catch (Exception e)
             {
                 Debug.LogError("[LoadBoost] 配置读取失败,使用默认值: " + e.Message);
             }
             return s;
+        }
+
+        public void Save(string cfgPath)
+        {
+            try
+            {
+                var node = new ConfigNode("LOADBOOST_SETTINGS");
+                node.AddValue("enablePrewarm", EnablePrewarm);
+                node.AddValue("prewarmThreads", PrewarmThreads);
+                node.AddValue("reportEnabled", ReportEnabled);
+                node.AddValue("verboseLog", VerboseLog);
+                node.AddValue("enableDiskScan", EnableDiskScan);
+                node.AddValue("perfKey", PerfKey);
+                node.AddValue("welcomeShown", WelcomeShown);
+                var root = new ConfigNode();
+                root.AddNode(node);
+                File.WriteAllText(cfgPath, root.ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[LoadBoost] 配置保存失败: " + e.Message);
+            }
         }
     }
 }
