@@ -24,6 +24,10 @@
       <HintPath>$(KspManaged)\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(KspManaged)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>$(KspGameData)\000_Harmony\0Harmony.dll</HintPath>
       <Private>false</Private>
