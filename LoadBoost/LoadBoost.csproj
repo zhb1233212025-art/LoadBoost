@@ -4,8 +4,11 @@
     <LangVersion>7.3</LangVersion>
     <AssemblyName>LoadBoost</AssemblyName>
     <RootNamespace>LoadBoost</RootNamespace>
-    <KspManaged>E:\ksp\Kerbal Space Program\KSP_x64_Data\Managed</KspManaged>
-    <KspGameData>E:\ksp\Kerbal Space Program\GameData</KspGameData>
+    <!-- KSP 安装根目录:可用环境变量 KSPDIR 覆盖(换机开发时无需改文件) -->
+    <KspRoot Condition="'$(KSPDIR)'!=''">$(KSPDIR)</KspRoot>
+    <KspRoot Condition="'$(KspRoot)'==''">E:\SteamLibrary\steamapps\common\Kerbal Space Program</KspRoot>
+    <KspManaged>$(KspRoot)\KSP_x64_Data\Managed</KspManaged>
+    <KspGameData>$(KspRoot)\GameData</KspGameData>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\LoadBoost.Core\LoadBoost.Core.csproj" />

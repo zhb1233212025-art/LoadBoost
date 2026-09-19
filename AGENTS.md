@@ -9,7 +9,8 @@
 
 ## 环境事实（KSP1 插件开发，2026-09 实证）
 
-- **主游玩安装：`E:\ksp\Kerbal Space Program`**（KSP 1.12.5，中文整合包，含 Kerbalism 3.42、Kopernicus、Principia、Parallax 等）。2026-09 用户重组磁盘后以此为准；旧路径 `E:\Kerbal Space Program` / `E:\Kerbal Space Program2` 已不存在。`E:\ksp\` 下还有其它独立安装（RP-1、principia 等），部署/验证一律以主安装为准。
+- **主游玩安装：`E:\SteamLibrary\steamapps\common\Kerbal Space Program`**（KSP 1.12.5，Steam 版整合包，含 Kerbalism 3.42、Kopernicus、Parallax、ModuleManager 4.2.3、000_Harmony 等；GameData 内未见 Principia）。2026-09-19 实证：`E:\ksp\Kerbal Space Program` 已不存在，用户改用此 Steam 安装为主安装，三个部署脚本默认路径已同步更新。更早的旧路径 `E:\Kerbal Space Program` / `E:\Kerbal Space Program2` 亦已不存在。部署/验证一律以主安装为准。
+- **换机开发**：三个 csproj 的 `KspManaged`/`KspGameData` 和三个部署脚本均支持用环境变量 `KSPDIR` 覆盖 KSP 安装根目录（不设则用上述主安装默认路径）；编译仍需目标机上有实际 KSP 安装（引用其 Managed 程序集）和 .NET SDK。
 - 本机 KSP 不写安装根 KSP.log——KSP.log 写到**进程 CWD**，插件日志同时也在 `Player.log`（%USERPROFILE%\AppData\LocalLow\Squad\Kerbal Space Program\Player.log；多个 KSP 安装共享同一 Player.log，最后运行的覆盖）。脚本化验证必须从游戏安装目录启动（KSP.log/glog 写安装目录属正常运行产物，勿从仓库根启动以免污染仓库）。
 - 该整合包启动到主菜单约 2–4 分钟（KSPCF FastLoader 重建缓存时可达 7 分钟以上），脚本化轮询窗口至少 8 分钟；日志有假安静期（停笔 30s+），判定主菜单就绪要看 MainMenu 场景行，不能只看停笔。
 - 本机 AppDomain 内有"毒"程序集：插件代码**禁止** `AppDomain.CurrentDomain.GetAssemblies()` + `Assembly.GetName()`（抛不可捕获的 ExecutionEngineException）。一律用 KSP 的 `AssemblyLoader.loadedAssemblies` 或程序集限定名 `Type.GetType`。
