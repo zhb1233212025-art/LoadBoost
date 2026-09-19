@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -17,13 +17,16 @@ namespace LoadBoost
 
         private Settings _settings;
         private bool _reported;
+        private string _cfgPath;
+        private bool _welcomeShown;
 
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
             PhaseTracker.StartUtc = DateTime.UtcNow;
             AsmDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            _settings = Settings.Load(Path.Combine(AsmDir, "LoadBoostSettings.txt"));
+            _cfgPath = Path.Combine(AsmDir, "LoadBoostSettings.txt");
+            _settings = Settings.Load(_cfgPath);
             Settings.SetCurrent(_settings);
             Debug.Log("[LoadBoost] Awake,prewarm=" + _settings.EnablePrewarm + ",threads=" + _settings.PrewarmThreads);
             LoadingPatches.Apply();
@@ -86,6 +89,19 @@ namespace LoadBoost
             _reported = true;
             try { if (Prewarm != null) Prewarm.Stop(); } catch { }
             if (_settings.ReportEnabled) ReportGenerator.WriteReport(_settings);
+            if (!_welcomeShown && !_settings.WelcomeShown)
+            {
+                _welcomeShown = true;
+                try
+                {
+                    var w = gameObject.AddComponent<WelcomeWindow>();
+                    w.Show(_settings, _cfgPath);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("[LoadBoost] 欢迎窗弹出失败: " + e.Message);
+                }
+            }
         }
 
         private void OnDestroy()
