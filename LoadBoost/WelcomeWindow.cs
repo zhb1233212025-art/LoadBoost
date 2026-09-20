@@ -7,7 +7,8 @@ namespace LoadBoost
     {
         private Settings _settings;
         private string _cfgPath;
-        private Rect _rect = new Rect(Screen.width / 2f - 220f, Screen.height / 2f - 200f, 440f, 400f);
+        private Rect _rect;
+        private bool _positioned;
         private bool _visible;
 
         private bool _prewarm, _report, _verbose, _diskScan;
@@ -29,11 +30,18 @@ namespace LoadBoost
         private void OnGUI()
         {
             if (!_visible) return;
+            if (!_positioned)
+            {
+                _rect = new Rect((Screen.width - 440f) / 2f, (Screen.height - 400f) / 2f, 440f, 400f);
+                _positioned = true;
+            }
             GUI.skin = HighLogic.Skin;
             _rect = GUILayout.Window(
                 GetInstanceID(), _rect, DrawWindow,
                 WelcomeStrings.Title,
                 GUILayout.Width(440f), GUILayout.Height(400f));
+            _rect.x = Mathf.Clamp(_rect.x, 0f, Screen.width - _rect.width);
+            _rect.y = Mathf.Clamp(_rect.y, 0f, Screen.height - _rect.height);
         }
 
         private void DrawWindow(int id)
