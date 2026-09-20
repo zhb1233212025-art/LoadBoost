@@ -44,7 +44,7 @@ Delete the `GameData/LoadBoost` folder.
 
 ### Feedback
 
-Report issues on GitHub: https://github.com/USER/REPO
+Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 
 ---
 
@@ -90,4 +90,4 @@ Report issues on GitHub: https://github.com/USER/REPO
 
 ### 反馈
 
-请在 GitHub 提交 issue：https://github.com/USER/REPO
+请在 GitHub 提交 issue：https://github.com/zhb1233212025-art/LoadBoost
