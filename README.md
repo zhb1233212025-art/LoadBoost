@@ -39,8 +39,14 @@ Settings live in `GameData/LoadBoost/LoadBoostSettings.txt` (KSP config-node for
 ### Compatibility
 
 - KSP 1.12.x (tested on 1.12.5)
-- Depends on `000_Harmony` (Harmony2)
+- Depends on `000_Harmony` (Harmony2) — required.
 - No ModuleManager required; does not modify Kopernicus/Kerbalism or any other mod — it only times and reports on them.
+
+### First run & ModuleManager cache
+
+- **The first launch (or right after installing/updating any mod) is slower.** That is ModuleManager rebuilding its patch cache — normal, and not caused by LoadBoost; LoadBoost just reports that time honestly.
+- **After that, as long as you don't change mods (add/remove/update mods, or manually delete `GameData/ModuleManager.ConfigSHA` / the MM cache), ModuleManager hits its cache and startup returns to normal speed.**
+- If **every** launch is slow, some mod is usually rewriting a cfg each launch and invalidating the MM cache — check the report's "unattributed" section and the ModuleManager log to find it.
 
 ### Notes
 
@@ -95,8 +101,14 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 ### 兼容性
 
 - KSP 1.12.x（已在 1.12.5 实测）
-- 依赖 `000_Harmony`（Harmony2）
+- 依赖 `000_Harmony`（Harmony2），**必需**。
 - 无需 ModuleManager；不修改 Kopernicus/Kerbalism 等任何 mod 的行为，仅对它们计时与统计。
+
+### 首启与 ModuleManager 缓存
+
+- **首次启动（或刚装/更新 mod 后）会比较慢**：这是 ModuleManager 在**重建补丁缓存**，属正常现象，与 LoadBoost 无关，LoadBoost 只是如实显示这段耗时。
+- **之后只要你不改动 mod（不增删/更新 mod、不手动删 `GameData/ModuleManager.ConfigSHA` 或 MM 缓存），ModuleManager 会命中缓存，启动就恢复正常速度**。
+- 如果**每次启动都慢**，通常是某个 mod 每次启动改写 cfg 导致 MM 缓存失效——可看报告里的「未归因」和 MM 日志定位。
 
 ### 注意事项
 
