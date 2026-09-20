@@ -6,7 +6,9 @@ KSP 1.12.x 加载加速与统计插件 —— 磁盘预热、阶段耗时、按 
 
 ## Download / 下载
 
-`LoadBoost-v0.1.1.zip` — extract into your KSP root so `GameData/LoadBoost/` sits under `GameData/`.
+**⬇ [LoadBoost-v0.1.1.zip](https://github.com/zhb1233212025-art/LoadBoost/releases/download/v0.1.1/LoadBoost-v0.1.1.zip)**（也可在本页下方 Assets 下载）
+
+Extract into your KSP root so `GameData/LoadBoost/` sits under `GameData/`.
 解压到 KSP 根目录，使 `GameData/LoadBoost/` 位于 `GameData/` 下。
 
 **Requires / 依赖:** `000_Harmony`（多数整合包自带）。

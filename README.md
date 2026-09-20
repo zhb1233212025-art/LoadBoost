@@ -2,6 +2,8 @@
 
 A loading accelerator and loading-statistics plugin for Kerbal Space Program 1.12.x — pre-reads GameData into the OS disk cache and shows you exactly where loading time goes.
 
+**[⬇ Download latest release 下载最新版](https://github.com/zhb1233212025-art/LoadBoost/releases/latest)**
+
 ---
 
 ## English
@@ -16,8 +18,9 @@ A loading accelerator and loading-statistics plugin for Kerbal Space Program 1.1
 
 ### Installation
 
-1. Extract the release zip into your KSP root folder, so that `GameData/LoadBoost` sits directly under `GameData`.
-2. Requires `000_Harmony` to be present in `GameData`.
+1. Download `LoadBoost-vX.Y.Z.zip` from the [latest release](https://github.com/zhb1233212025-art/LoadBoost/releases/latest) (Assets section).
+2. Extract the zip into your KSP root folder, so that `GameData/LoadBoost` sits directly under `GameData`.
+3. Requires `000_Harmony` to be present in `GameData`.
 
 ### Configuration
 
@@ -62,8 +65,9 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 
 ### 安装
 
-1. 将发布 zip 解压到 KSP 根目录，使 `GameData/LoadBoost` 直接位于 `GameData` 之下。
-2. 需要 `GameData` 中已存在 `000_Harmony`。
+1. 从 [最新发布](https://github.com/zhb1233212025-art/LoadBoost/releases/latest) 的 Assets 下载 `LoadBoost-vX.Y.Z.zip`。
+2. 将 zip 解压到 KSP 根目录，使 `GameData/LoadBoost` 直接位于 `GameData` 之下。
+3. 需要 `GameData` 中已存在 `000_Harmony`。
 
 ### 配置
 
