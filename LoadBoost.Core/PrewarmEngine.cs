@@ -18,6 +18,7 @@ namespace LoadBoost.Core
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private readonly Stopwatch _watch = new Stopwatch();
         private volatile bool _producerDone;
+        private volatile bool _startComplete;
         private long _filesRead;
         private long _bytesRead;
         private long _filesFailed;
@@ -30,7 +31,8 @@ namespace LoadBoost.Core
             _threadCount = Math.Max(1, threadCount);
         }
 
-        public bool Finished => _started && _threads.All(t => !t.IsAlive);
+        // 仅当所有线程都已启动且全部退出后才算完成,避免 worker 未 Start() 时 IsAlive=false 造成误判
+        public bool Finished => _startComplete && _threads.All(t => !t.IsAlive);
 
         public PrewarmStats Stats => new PrewarmStats
         {
@@ -43,16 +45,21 @@ namespace LoadBoost.Core
         public void Start()
         {
             if (_started) return;
-            _started = true;
-            _watch.Start();
-            var producer = new Thread(Produce) { IsBackground = true, Name = "LoadBoost.Prewarm.Producer" };
-            _threads.Add(producer);
-            producer.Start();
-            for (int i = 0; i < _threadCount; i++)
+            lock (_threads)
             {
-                var t = new Thread(Work) { IsBackground = true, Name = "LoadBoost.Prewarm" };
-                _threads.Add(t);
-                t.Start();
+                if (_started) return;
+                _started = true;
+                _watch.Start();
+                var producer = new Thread(Produce) { IsBackground = true, Name = "LoadBoost.Prewarm.Producer" };
+                _threads.Add(producer);
+                producer.Start();
+                for (int i = 0; i < _threadCount; i++)
+                {
+                    var t = new Thread(Work) { IsBackground = true, Name = "LoadBoost.Prewarm" };
+                    _threads.Add(t);
+                    t.Start();
+                }
+                _startComplete = true;
             }
         }
 
@@ -75,7 +82,8 @@ namespace LoadBoost.Core
             }
             catch (Exception)
             {
-                // 枚举失败(目录消失/权限):已入队的文件照常预热
+                // 枚举失败(目录消失/权限):已入队的文件照常预热,计入失败数避免静默
+                Interlocked.Increment(ref _filesFailed);
             }
             finally
             {

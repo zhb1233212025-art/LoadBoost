@@ -33,7 +33,7 @@ namespace LoadBoost
                 if (node.TryGetValue("reportEnabled", ref b)) s.ReportEnabled = b;
                 if (node.TryGetValue("verboseLog", ref b)) s.VerboseLog = b;
                 if (node.TryGetValue("enableDiskScan", ref b)) s.EnableDiskScan = b;
-                if (node.TryGetValue("prewarmThreads", ref i)) s.PrewarmThreads = i;
+                if (node.TryGetValue("prewarmThreads", ref i) && i >= 1) s.PrewarmThreads = i;
                 string sv = null;
                 if (node.TryGetValue("perfKey", ref sv) && !string.IsNullOrEmpty(sv)) s.PerfKey = sv;
                 if (node.TryGetValue("welcomeShown", ref b)) s.WelcomeShown = b;

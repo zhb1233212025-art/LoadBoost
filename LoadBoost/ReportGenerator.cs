@@ -21,9 +21,26 @@ namespace LoadBoost
                     LoadedAssets = null,
                     Prewarm = LoadBoostPlugin.Prewarm == null ? null : LoadBoostPlugin.Prewarm.Stats
                 };
-                // 磁盘扫描在插件 Awake 时已后台启动(LoadBoostPlugin.DiskScanTask),此处只取结果,不占主线程
-                try { data.DiskStats = LoadBoostPlugin.DiskScanTask == null ? null : LoadBoostPlugin.DiskScanTask.Result; }
-                catch (Exception e) { Debug.LogError("[LoadBoost] 磁盘扫描失败: " + e.Message); }
+                // 磁盘扫描在插件 Awake 时已后台启动(LoadBoostPlugin.DiskScanTask)。
+                // 仅在其已完成时取结果,绝不阻塞主线程;未完成则在报告里标注,不等待。
+                var scanTask = LoadBoostPlugin.DiskScanTask;
+                if (scanTask == null)
+                {
+                    data.DiskStats = null;
+                }
+                else if (scanTask.IsCompleted)
+                {
+                    try { data.DiskStats = scanTask.Result; }
+                    catch (Exception e) { Debug.LogError("[LoadBoost] 磁盘扫描失败: " + e.GetBaseException()); }
+                }
+                else
+                {
+                    Debug.Log("[LoadBoost] 磁盘扫描尚未完成,报告中该段将标注为进行中。");
+                    data.DiskStats = new System.Collections.Generic.List<ModDiskStats>
+                    {
+                        new ModDiskStats { ModName = "(磁盘扫描进行中,下次启动后查看完整统计)" }
+                    };
+                }
                 try { data.LoadedAssets = LoadedAssetCollector.Collect(); }
                 catch (Exception e) { Debug.LogError("[LoadBoost] 资产采集失败: " + e.Message); }
 

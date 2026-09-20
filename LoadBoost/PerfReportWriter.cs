@@ -25,7 +25,9 @@ namespace LoadBoost
                     Entries = PerfAggregator.SnapshotEntries()
                 };
                 var text = PerfReportBuilder.Build(data);
-                var outPath = Path.Combine(LoadBoostPlugin.AsmDir, "PluginData", "perf-report.txt");
+                var outDir = Path.Combine(LoadBoostPlugin.AsmDir, "PluginData");
+                Directory.CreateDirectory(outDir);
+                var outPath = Path.Combine(outDir, "perf-report.txt");
                 File.WriteAllText(outPath, text, new UTF8Encoding(true));
                 Debug.Log("[LoadBoost] 帧率报告: " + outPath);
                 return true;

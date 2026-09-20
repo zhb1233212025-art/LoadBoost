@@ -13,26 +13,90 @@ namespace LoadBoost.Core
                 throw new DirectoryNotFoundException("GameData not found: " + gameDataRoot);
 
             var result = new List<ModDiskStats>();
-            foreach (var topDir in Directory.EnumerateDirectories(gameDataRoot))
+            foreach (var topDir in SafeEnumerateDirs(gameDataRoot))
             {
                 var stats = new ModDiskStats { ModName = Path.GetFileName(topDir) };
-                Accumulate(stats, topDir, SearchOption.AllDirectories);
+                Accumulate(stats, topDir);
                 if (stats.FileCount > 0) result.Add(stats);
             }
             var loose = new ModDiskStats { ModName = "(GameData 根目录散文件)" };
-            Accumulate(loose, gameDataRoot, SearchOption.TopDirectoryOnly);
+            AccumulateTopOnly(loose, gameDataRoot);
             if (loose.FileCount > 0) result.Add(loose);
             return result.OrderByDescending(s => s.TotalBytes).ToList();
         }
 
-        private static void Accumulate(ModDiskStats stats, string dir, SearchOption option)
+        // 递归累加某 mod 目录;逐层降级,单个坏目录不拖垮整盘扫描;跳过 junction/reparse 防循环。
+        private static void Accumulate(ModDiskStats stats, string dir)
         {
-            foreach (var file in Directory.EnumerateFiles(dir, "*", option))
+            foreach (var file in SafeEnumerateFiles(dir))
             {
-                long len;
-                try { len = new FileInfo(file).Length; }
-                catch (Exception) { continue; } // 扫描途中文件消失,跳过
-                AddFile(stats, file, len);
+                AddFileSafe(stats, file);
+            }
+            foreach (var sub in SafeEnumerateDirs(dir))
+            {
+                Accumulate(stats, sub);
+            }
+        }
+
+        private static void AccumulateTopOnly(ModDiskStats stats, string dir)
+        {
+            foreach (var file in SafeEnumerateFiles(dir))
+            {
+                AddFileSafe(stats, file);
+            }
+        }
+
+        private static void AddFileSafe(ModDiskStats stats, string file)
+        {
+            long len;
+            try { len = new FileInfo(file).Length; }
+            catch (Exception) { return; } // 扫描途中文件消失,跳过
+            AddFile(stats, file, len);
+        }
+
+        // 枚举文件,枚举途中异常(权限/目录消失/路径过长)逐次吞掉,不中断
+        private static IEnumerable<string> SafeEnumerateFiles(string dir)
+        {
+            IEnumerable<string> files = null;
+            try { files = Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly); }
+            catch (Exception) { yield break; }
+            using (var e = files.GetEnumerator())
+            {
+                while (true)
+                {
+                    string cur = null;
+                    bool ok = false;
+                    try { ok = e.MoveNext(); if (ok) cur = e.Current; }
+                    catch (Exception) { yield break; }
+                    if (!ok) yield break;
+                    yield return cur;
+                }
+            }
+        }
+
+        // 枚举子目录,跳过 reparse point(junction/符号链接),防递归循环
+        private static IEnumerable<string> SafeEnumerateDirs(string dir)
+        {
+            IEnumerable<string> dirs = null;
+            try { dirs = Directory.EnumerateDirectories(dir, "*", SearchOption.TopDirectoryOnly); }
+            catch (Exception) { yield break; }
+            using (var e = dirs.GetEnumerator())
+            {
+                while (true)
+                {
+                    string cur = null;
+                    bool ok = false;
+                    try { ok = e.MoveNext(); if (ok) cur = e.Current; }
+                    catch (Exception) { yield break; }
+                    if (!ok) yield break;
+                    bool isReparse = false;
+                    try
+                    {
+                        isReparse = (File.GetAttributes(cur) & FileAttributes.ReparsePoint) != 0;
+                    }
+                    catch (Exception) { }
+                    if (!isReparse) yield return cur;
+                }
             }
         }
 

@@ -51,7 +51,7 @@ namespace LoadBoost.Core
             }
             else
             {
-                foreach (var m in data.DiskStats.Take(20))
+                foreach (var m in data.DiskStats.OrderByDescending(s => s.TotalBytes).Take(20))
                     sb.AppendLine(string.Format("{0,-40} {1,10}  文件 {2,6}  纹理 {3}  模型 {4}  音频 {5}",
                         m.ModName, FmtBytes(m.TotalBytes), m.FileCount,
                         FmtBytes(m.TextureBytes), FmtBytes(m.ModelBytes), FmtBytes(m.AudioBytes)));
@@ -65,7 +65,7 @@ namespace LoadBoost.Core
             }
             else
             {
-                foreach (var a in data.LoadedAssets.Take(20))
+                foreach (var a in data.LoadedAssets.OrderByDescending(s => s.TextureCount).Take(20))
                     sb.AppendLine(string.Format("{0,-40} 纹理 {1,6}  模型 {2,6}  音频 {3,6}",
                         a.ModName, a.TextureCount, a.ModelCount, a.AudioCount));
             }
