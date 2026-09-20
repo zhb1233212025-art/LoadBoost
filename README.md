@@ -38,8 +38,17 @@ Settings live in `GameData/LoadBoost/LoadBoostSettings.txt` (KSP config-node for
 
 ### Compatibility
 
-- KSP 1.12.x
-- Depends on `000_Harmony`
+- KSP 1.12.x (tested on 1.12.5)
+- Depends on `000_Harmony` (Harmony2)
+- No ModuleManager required; does not modify Kopernicus/Kerbalism or any other mod — it only times and reports on them.
+
+### Notes
+
+- **Disk prewarm helps most on HDD / heavily-modded installs.** On NVMe/SATA SSDs the gain is small; you can disable it via `enablePrewarm` in the welcome window or settings file.
+- Prewarm reads the whole GameData in the background during loading and may compete for disk I/O; on very low-end machines set `prewarmThreads` to `1`.
+- The first-launch welcome window is shown only once. To reopen it, set `welcomeShown` back to `False` in `LoadBoostSettings.txt`.
+- The **F9 live performance panel** works only in flight scenes.
+- The plugin is **read-only**: it only reads GameData for prewarm/statistics and never modifies any game files.
 
 ### Uninstall
 
@@ -85,8 +94,17 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 
 ### 兼容性
 
-- KSP 1.12.x
-- 依赖 `000_Harmony`
+- KSP 1.12.x（已在 1.12.5 实测）
+- 依赖 `000_Harmony`（Harmony2）
+- 无需 ModuleManager；不修改 Kopernicus/Kerbalism 等任何 mod 的行为，仅对它们计时与统计。
+
+### 注意事项
+
+- **磁盘预热主要对机械硬盘 (HDD) 或超大整合包效果明显**；NVMe/SATA SSD 上提升很小，可在欢迎窗或配置文件里关闭 `enablePrewarm`。
+- 预热会在加载期间后台读取整个 GameData，可能争抢磁盘 IO；极低配机器可把 `prewarmThreads` 调为 `1`。
+- 首启欢迎窗只弹一次；想再次打开，把 `LoadBoostSettings.txt` 里 `welcomeShown` 改回 `False`。
+- **F9 实时性能面板**仅在飞行场景生效。
+- 本插件为**只读**：只读取 GameData 做预热与统计，不修改任何游戏文件。
 
 ### 卸载
 
