@@ -57,7 +57,7 @@ Real numbers from LoadBoost's own auto-generated reports, same machine / same mo
 | Files on disk | 3,759 | 18,336 | 4.9× |
 | PartLoader phase | 3.5 s | 38.1 s | +34.6 s |
 
-Full breakdown: [loadboost-stock-vs-modded-benchmark.md](docs/superpowers/loadboost-stock-vs-modded-benchmark.md). Key takeaway: **part-count bloat (PartLoader +34.6 s) is the #1 cause of slow loading**, and disk prewarm pays off on heavily-modded / HDD installs — on a small stock install it gains little.
+Full breakdown: [loadboost-stock-vs-modded-benchmark.md](docs/superpowers/loadboost-stock-vs-modded-benchmark.md). Key takeaway: **part-count bloat (PartLoader +34.6 s) is the #1 cause of slow loading**. Note: this benchmark has no prewarm-off control group, so it does not by itself quantify how much prewarm helps — it only shows where the loading time goes.
 
 ### First run & ModuleManager cache
 
@@ -136,7 +136,7 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 | 磁盘文件数 | 3,759 | 18,336 | 4.9× |
 | PartLoader 阶段 | 3.5 s | 38.1 s | +34.6 s |
 
-完整明细见 [loadboost-stock-vs-modded-benchmark.md](docs/superpowers/loadboost-stock-vs-modded-benchmark.md)。结论：**零件数量膨胀（PartLoader +34.6 s）是加载变慢的头号原因**；磁盘预热在重度整合包 / 机械硬盘上才划算，纯原版小体积下收益很小。
+完整明细见 [loadboost-stock-vs-modded-benchmark.md](docs/superpowers/loadboost-stock-vs-modded-benchmark.md)。结论：**零件数量膨胀（PartLoader +34.6 s）是加载变慢的头号原因**。注意：本测试未设「关闭预热」对照组，因此该数据本身并不能量化预热的加速效果——它只是如实显示了加载时间花在哪里。
 
 ### 首启与 ModuleManager 缓存
 
