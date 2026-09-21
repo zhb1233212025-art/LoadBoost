@@ -16,11 +16,16 @@ A loading accelerator and loading-statistics plugin for Kerbal Space Program 1.1
 - **Scene-transition timing** plus an **F9 live performance panel**.
 - **First-launch welcome window**: on the first run, an editable settings panel pops up (IMGUI; bilingual zh/en, follows the game language) with a Save button. It is shown only once.
 
+### Requirements / 依赖
+
+- **KSP 1.12.x**（已在 1.12.5 实测）
+- **`000_Harmony`（Harmony2）— 必需，原版 KSP 不自带，需单独安装。** 没有它 LoadBoost 不会运行。
+
 ### Installation
 
-1. Download `LoadBoost-vX.Y.Z.zip` from the [latest release](https://github.com/zhb1233212025-art/LoadBoost/releases/latest) (Assets section).
-2. Extract the zip into your KSP root folder, so that `GameData/LoadBoost` sits directly under `GameData`.
-3. Requires `000_Harmony` to be present in `GameData`.
+1. Ensure `000_Harmony` is present in `GameData` (install it first if you're on a stock install).
+2. Download `LoadBoost-vX.Y.Z.zip` from the [latest release](https://github.com/zhb1233212025-art/LoadBoost/releases/latest) (Assets section).
+3. Extract the zip into your KSP root folder, so that `GameData/LoadBoost` sits directly under `GameData`.
 
 ### Configuration
 
@@ -38,8 +43,7 @@ Settings live in `GameData/LoadBoost/LoadBoostSettings.txt` (KSP config-node for
 
 ### Compatibility
 
-- KSP 1.12.x (tested on 1.12.5)
-- Depends on `000_Harmony` (Harmony2) — required.
+- KSP 1.12.x (tested on 1.12.5); 1.12.0–1.12.4 should work.
 - No ModuleManager required; does not modify Kopernicus/Kerbalism or any other mod — it only times and reports on them.
 
 ### First run & ModuleManager cache
@@ -78,11 +82,16 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 - **场景切换计时**，以及 **F9 实时性能面板**。
 - **首启欢迎窗**：首次启动弹出可编辑配置面板（IMGUI，中英双语，跟随游戏语言），带保存按钮，仅显示一次。
 
+### 依赖要求
+
+- **KSP 1.12.x**（已在 1.12.5 实测）
+- **`000_Harmony`（Harmony2）— 必需，原版 KSP 不自带，需单独安装。** 没有它 LoadBoost 不会运行。
+
 ### 安装
 
-1. 从 [最新发布](https://github.com/zhb1233212025-art/LoadBoost/releases/latest) 的 Assets 下载 `LoadBoost-vX.Y.Z.zip`。
-2. 将 zip 解压到 KSP 根目录，使 `GameData/LoadBoost` 直接位于 `GameData` 之下。
-3. 需要 `GameData` 中已存在 `000_Harmony`。
+1. 确认 `GameData` 中已存在 `000_Harmony`（纯净原版请先安装它）。
+2. 从 [最新发布](https://github.com/zhb1233212025-art/LoadBoost/releases/latest) 的 Assets 下载 `LoadBoost-vX.Y.Z.zip`。
+3. 将 zip 解压到 KSP 根目录，使 `GameData/LoadBoost` 直接位于 `GameData` 之下。
 
 ### 配置
 
@@ -100,8 +109,7 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 
 ### 兼容性
 
-- KSP 1.12.x（已在 1.12.5 实测）
-- 依赖 `000_Harmony`（Harmony2），**必需**。
+- KSP 1.12.x（已在 1.12.5 实测；1.12.0–1.12.4 理论兼容）
 - 无需 ModuleManager；不修改 Kopernicus/Kerbalism 等任何 mod 的行为，仅对它们计时与统计。
 
 ### 首启与 ModuleManager 缓存
