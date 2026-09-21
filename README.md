@@ -46,6 +46,19 @@ Settings live in `GameData/LoadBoost/LoadBoostSettings.txt` (KSP config-node for
 - KSP 1.12.x (tested on 1.12.5); 1.12.0–1.12.4 should work.
 - No ModuleManager required; does not modify Kopernicus/Kerbalism or any other mod — it only times and reports on them.
 
+### Measured data
+
+Real numbers from LoadBoost's own auto-generated reports, same machine / same mod version, only GameData differs:
+
+| | Stock (no mods) | Heavy modpack (70 mods) | Diff |
+| --- | --- | --- | --- |
+| **Total load time** | **62.7 s** | **97.8 s** | **+56%** |
+| GameData size | 2.2 GB | 12.0 GB | 5.5× |
+| Files on disk | 3,759 | 18,336 | 4.9× |
+| PartLoader phase | 3.5 s | 38.1 s | +34.6 s |
+
+Full breakdown: [loadboost-stock-vs-modded-benchmark.md](docs/superpowers/loadboost-stock-vs-modded-benchmark.md). Key takeaway: **part-count bloat (PartLoader +34.6 s) is the #1 cause of slow loading**, and disk prewarm pays off on heavily-modded / HDD installs — on a small stock install it gains little.
+
 ### First run & ModuleManager cache
 
 - **The first launch (or right after installing/updating any mod) is slower.** That is ModuleManager rebuilding its patch cache — normal, and not caused by LoadBoost; LoadBoost just reports that time honestly.
@@ -111,6 +124,19 @@ Report issues on GitHub: https://github.com/zhb1233212025-art/LoadBoost
 
 - KSP 1.12.x（已在 1.12.5 实测；1.12.0–1.12.4 理论兼容）
 - 无需 ModuleManager；不修改 Kopernicus/Kerbalism 等任何 mod 的行为，仅对它们计时与统计。
+
+### 实测数据
+
+以下数字均来自 LoadBoost 自动生成的报告，同一台机器、同一 mod 版本，仅 GameData 不同：
+
+| | 纯原版（无 mod） | 重度整合包（70 个 mod） | 差异 |
+| --- | --- | --- | --- |
+| **总加载耗时** | **62.7 s** | **97.8 s** | **+56%** |
+| GameData 大小 | 2.2 GB | 12.0 GB | 5.5× |
+| 磁盘文件数 | 3,759 | 18,336 | 4.9× |
+| PartLoader 阶段 | 3.5 s | 38.1 s | +34.6 s |
+
+完整明细见 [loadboost-stock-vs-modded-benchmark.md](docs/superpowers/loadboost-stock-vs-modded-benchmark.md)。结论：**零件数量膨胀（PartLoader +34.6 s）是加载变慢的头号原因**；磁盘预热在重度整合包 / 机械硬盘上才划算，纯原版小体积下收益很小。
 
 ### 首启与 ModuleManager 缓存
 
